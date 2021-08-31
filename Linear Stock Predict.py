@@ -1,7 +1,6 @@
 # Import Libraries
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.svm import SVR
@@ -28,7 +27,7 @@ price_days = price.loc[:, "Date"]
 price_adj = price.loc[:, "Adj Close"]
 print(price_adj)
 
-"""
+
 # Append to a List
 for D in price_days:
     days.append(D.split('-')[2])
@@ -46,14 +45,21 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # SVR Model
 SVR_model = SVR(kernel='rbf', C=1000, gamma=0.85)
 SVR_model.fit(X_train, y_train)
+SVR_acc = SVR_model.score(X_test, y_test)
+print(SVR_acc)
 
 # Linear Regression Model
 Lin_model = LinearRegression()
 Lin_model.fit(X_train, y_train)
+Lin_acc = Lin_model.score(X_test, y_test)
+print(Lin_acc)
+
 
 # RandomForestRegressor Model
 RFR_model = RandomForestRegressor()
 RFR_model.fit(X_train, y_train)
+RFR_acc = RFR_model.score(X_test, y_test)
+print(RFR_acc)
 
 
 # Test the Prediction 
@@ -64,7 +70,8 @@ print('LinearRegression Predicted Price =', Lin_model.predict(last_day))
 print('SVR_rgf Predicted Price =', SVR_model.predict(last_day))
 print('RFR Predicted Price =', RFR_model.predict(last_day))
 print('Amazon Actual Price =', last_price["Adj Close"][19])
-"""
+
+
 
 
 
